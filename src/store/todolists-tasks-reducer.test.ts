@@ -1,11 +1,11 @@
-import {TasksStateType} from "../AppWithRedux";
+
 import {
     addTodolistAC,
     setTodolistsAC,
     TodolistDomainType,
     todolistsReducer
 } from "./todolists-reducer";
-import {tasksReducer} from "./tasks-reducer";
+import {tasksReducer, TasksStateType} from "./tasks-reducer";
 import {TodolistType} from "../api-services/http.service";
 
 

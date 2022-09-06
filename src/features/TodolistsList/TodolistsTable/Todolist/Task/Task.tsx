@@ -1,11 +1,11 @@
 import React from "react";
-import CheckBox from "./CheckBox";
-import EditableSpan from "./EditableSpan";
+import CheckBox from "../../../../../components/Checkbox/CheckBox";
+import EditableSpan from "../../../../../components/EditableSpan/EditableSpan";
 import {IconButton} from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import styles from '../index.module.css';
-import {FilterType} from "../store/todolists-reducer";
-import {TaskStatuses, TaskType} from "../api-services/http.service";
+import styles from '../../../../../index.module.css';
+import {FilterType} from "../../../../../store/todolists-reducer";
+import {TaskStatuses, TaskType} from "../../../../../api-services/http.service";
 
 
 type TaskPropsType = {

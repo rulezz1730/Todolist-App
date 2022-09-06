@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import {action} from "@storybook/addon-actions";
 import Task from "./Task";
-import {TaskPriorities, TaskStatuses} from "../api-services/http.service";
+import {TaskPriorities, TaskStatuses} from "../../../../../api-services/http.service";
 
 
 // const changeCheckTaskCallback = action('Change Check Task Status called ');

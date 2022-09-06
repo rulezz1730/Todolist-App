@@ -1,6 +1,7 @@
 import axios from "axios";
 
-
+//axios preferences
+//
 const settings = {
     withCredentials: true,
     headers: {
@@ -12,65 +13,7 @@ const http = axios.create({
     ...settings,
 });
 
-
-export type TodolistType = {
-    id: string;
-    addedDate: string;
-    order: number;
-    title: string;
-};
-
-type ResponseTodolistType<D = {}> = {
-    resultCode: number
-    fieldErrors: string[]
-    messages: string[],
-    data: D
-}
-
-export enum TaskStatuses {
-    New = 0,
-    InProgress = 1,
-    Completed = 2,
-    Draft = 3,
-}
-
-export enum TaskPriorities {
-    Low = 0,
-    Middle = 1,
-    Hi = 2,
-    Urgently = 3,
-    Later = 4,
-}
-
-export type TaskType = {
-    id: string
-    todoListId: string
-    title: string
-    description: string | null
-    status: TaskStatuses
-    priority: TaskPriorities
-    startDate: string
-    deadline: string
-    order: number
-    addedDate: string
-}
-
-type GetTasksResponseType<T = {}> = {
-    totalCount: number
-    error: string
-    items: T
-}
-
-export type UpdateModelTaskType = {
-    title: string,
-    description: string | null,
-    status: TaskStatuses,
-    priority: number,
-    startDate: string,
-    deadline: string,
-}
-
-
+//api
 export const todolistsApi = {
     async getTodolists() {
         return await http.get<Array<TodolistType>>('/todo-lists')
@@ -87,20 +30,70 @@ export const todolistsApi = {
     async getTasks(todolistId: string) {
         return await http.get<GetTasksResponseType<TaskType[]>>(`/todo-lists/${todolistId}/tasks`)
     },
-
     async createNewTask(todolistId: string, title: string) {
         const payload = {
             title: title
         }
         return await http.post<ResponseTodolistType<{item:TaskType}>>(`/todo-lists/${todolistId}/tasks`, payload)
     },
-
     async deleteTask(todolistId: string, id: string) {
         return await http.delete<ResponseTodolistType>(`/todo-lists/${todolistId}/tasks/${id}`)
     },
-
     async updateTaskTitle(todolistId: string, id: string, model: UpdateModelTaskType) {
         return http.put<ResponseTodolistType<{ items: TaskType }>>(`todo-lists/${todolistId}/tasks/${id}`, model)
     }
 };
+
+//types
+export type TodolistType = {
+    id: string;
+    addedDate: string;
+    order: number;
+    title: string;
+};
+export type ResponseTodolistType<D = {}> = {
+    resultCode: number
+    fieldErrors: string[]
+    messages: string[],
+    data: D
+}
+export type TaskType = {
+    id: string
+    todoListId: string
+    title: string
+    description: string | null
+    status: TaskStatuses
+    priority: TaskPriorities
+    startDate: string
+    deadline: string
+    order: number
+    addedDate: string
+}
+export enum TaskStatuses {
+    New = 0,
+    InProgress = 1,
+    Completed = 2,
+    Draft = 3,
+}
+export enum TaskPriorities {
+    Low = 0,
+    Middle = 1,
+    Hi = 2,
+    Urgently = 3,
+    Later = 4,
+}
+export type GetTasksResponseType<T = {}> = {
+    totalCount: number
+    error: string
+    items: T
+}
+export type UpdateModelTaskType = {
+    title: string,
+    description: string | null,
+    status: TaskStatuses,
+    priority: number,
+    startDate: string,
+    deadline: string,
+}
+
 

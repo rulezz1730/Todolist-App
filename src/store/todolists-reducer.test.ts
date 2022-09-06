@@ -1,5 +1,6 @@
 import {
     addTodolistAC,
+    changeTodolistEntityStatusAC,
     changeTodolistFilterAC,
     FilterType,
     removeTodolistAC,
@@ -9,6 +10,7 @@ import {
     updateTodolistTitleAC,
 } from "./todolists-reducer";
 import {v1 as uuidv1} from "uuid";
+import {AppStatus} from "./app-reducer";
 
 let todoListId1: string;
 let todoListId2: string;
@@ -18,8 +20,8 @@ beforeEach(() => {
     todoListId1 = uuidv1();
     todoListId2 = uuidv1();
     startState = [
-        {id: todoListId1, title: 'What to learning', filter: "all", addedDate: '', order: 0},
-        {id: todoListId2, title: 'What to buy', filter: "all", addedDate: '', order: 0},
+        {id: todoListId1, title: 'What to learning', filter: "all", addedDate: '', order: 0, entityStatus: AppStatus.idle},
+        {id: todoListId2, title: 'What to buy', filter: "all", addedDate: '', order: 0, entityStatus: AppStatus.idle},
     ]
 })
 
@@ -87,4 +89,11 @@ test('Correct get Todolists from server side', () => {
     expect(endState.length).toBe(2)
     expect(endState[0].title).toBe('What to learning')
     expect(endState[1].filter).toBe('all')
+})
+
+test('Correct entityStatus todolist should be changed', () => {
+    const endState = todolistsReducer(startState, changeTodolistEntityStatusAC(todoListId1, AppStatus.progress))
+
+    expect(endState[0].entityStatus).toBe(AppStatus.progress)
+    expect(endState[1].entityStatus).toBe(AppStatus.idle)
 })

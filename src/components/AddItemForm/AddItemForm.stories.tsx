@@ -4,7 +4,6 @@ import {action} from "@storybook/addon-actions";
 import AddItemForm from "./AddItemForm";
 
 export default {
-    // title: 'AddItemForm Component Story  TODOLIST/',
     title: 'TODOLIST/Add Item Form Story',
     component: AddItemForm,
     argTypes:{
@@ -22,7 +21,14 @@ export const AddItemFormStory = Template.bind({})
 const callback = action('Button "add" was pressed inside the form')
 
 AddItemFormStory.args = {
-    addItem: callback
+    addItem: callback,
+    disabled: false,
+}
+
+export const AddItemFormDisabledStory = Template.bind({})
+AddItemFormDisabledStory.args ={
+    addItem: callback,
+    disabled: true,
 }
 
 // Variable to create story

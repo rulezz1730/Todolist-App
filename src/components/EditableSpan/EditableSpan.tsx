@@ -32,7 +32,8 @@ const EditableSpan = React.memo(({title, onChange, tId}: EditableSpanPropsType) 
                      variant="outlined"
                      value={value}
                      onChange={handleChangeInput}
-                     onBlur={deactivateEditMode} autoFocus/>
+                     onBlur={deactivateEditMode}
+                     autoFocus/>
         : <span onDoubleClick={activateEditMode}>{title}</span>
 })
 
